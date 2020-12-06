@@ -129,6 +129,7 @@ int main() {
 
     auto curr_time = std::chrono::system_clock::now(), prev_time = curr_time;
     int frame_count = 0;
+    glfwSwapInterval(0); // assert swap interval is not binded to 60 fps
     spdlog::info("Entering render LOOP");
     while (!glfwWindowShouldClose(window)) {
         // input
