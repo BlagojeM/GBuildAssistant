@@ -1,0 +1,5 @@
+mkdir build
+cd build
+conan install ../conanfile.txt -s compiler.libcxx=libstdc++11 --build=missi
+cmake ..
+make
