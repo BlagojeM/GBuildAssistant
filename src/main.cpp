@@ -10,6 +10,8 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 
+#define GLFW_INCLUDE_ES3
+
 void die(std::string_view msg) {
     spdlog::error(msg);
     exit(EXIT_FAILURE);
@@ -17,17 +19,19 @@ void die(std::string_view msg) {
 
 int main() {
     glfwInit();
-    // if uncomment Hints raspberry build not working
-    // Disable some old features like glBegin/glEnd etc...
+    // if uncomment Hints raspberry (GLES) build not working
     // glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     // glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     // glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
+    // Use GLES instead of GL 3.3
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3) ;
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0) ;
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API) ;
+
 #ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
-
-    // glfw window creation
     GLFWwindow* window = glfwCreateWindow(800, 600, "Hello quad", NULL, NULL);
     if (window == NULL) {
         glfwTerminate();
@@ -43,9 +47,12 @@ int main() {
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
         die("Failed to initialize GLAD");
 
+    const GLubyte * version = glGetString(GL_VERSION);
+    spdlog::warn("{}\n", version);
+
     constexpr const char* vertexShaderSource = 
         "#version 300 es\n"
-        "layout (location = 0) in vec3 aPos;\n"
+        "layout (location = 0) in mediump vec3 aPos;\n"
         "void main()\n"
         "{\n"
         "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
