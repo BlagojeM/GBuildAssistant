@@ -1,5 +1,7 @@
 *.o
 *.out
+out
 .idea
+.vs
 compile_commands.json
 *build*
