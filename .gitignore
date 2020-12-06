@@ -2,6 +2,8 @@
 *.out
 out
 .idea
+.vscode
 .vs
 compile_commands.json
 *build*
+CMakeLists.txt.user
