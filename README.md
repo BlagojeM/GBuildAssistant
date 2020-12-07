@@ -6,14 +6,14 @@ Game Engine
 
 - Conan package manager:  [https://conan.io/](https://conan.io/)
 - CMake version 3.10+: [https://cmake.org/](https://cmake.org/)
-- Compiler with at least c++17 support (ex. gcc, msvc, clang, ...).
+- Compiler with at least c++17 support (ex. gcc, msvc, clang, ...)
 
 ## Building
 
 - Internet connection is required
 - Position yourself in root directory of project and run
 - Conan will try to automatically to install system dependencies
- with default package manager for your system.
+ with default package manager for your system
 
 **BUILD INSTRUCTIONS**
 ```bash
@@ -25,6 +25,15 @@ make
 ```
 Executable should be generated inside build/bin
 
+## Platform Support
+
+Project is **tested** and builds with:
+
+-  \[**x86\_64**\] Windows with MSVC compiler (visual studio)
+-  \[**x86\_64**\] Linux (Ubuntu, Arch, Debian)
+-  \[**arm64**\] Linux on Raspberry Pi 4
+
+
 ## IDE Support
 
-- IDEs with CMake support will work fine, all you need is [conan](https://conan.io/) and [cmake](https://cmake.org/) installed on system.
+IDEs with CMake support will work fine, all you need is [conan](https://conan.io/) and [cmake](https://cmake.org/) installed on system.
