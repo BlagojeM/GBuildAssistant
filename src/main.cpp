@@ -10,8 +10,6 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 
-#define GLFW_INCLUDE_ES3
-
 void die(std::string_view msg) {
     spdlog::error(msg);
     exit(EXIT_FAILURE);
@@ -19,12 +17,12 @@ void die(std::string_view msg) {
 
 int main() {
     glfwInit();
-    // if uncomment Hints raspberry (GLES) build not working
+    // Hint to use OpenGL 3.3 build not working
     // glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     // glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     // glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    // Use GLES instead of GL 3.3
+    // Hint to use GLES 3.0 instead of OpenGL
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3) ;
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0) ;
     glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API) ;
@@ -141,8 +139,8 @@ int main() {
     spdlog::info("Entering render LOOP");
     while (!glfwWindowShouldClose(window)) {
         // input
-		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-			glfwSetWindowShouldClose(window, true);
+        if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+            glfwSetWindowShouldClose(window, true);
 
        // Calculate FPS to display every 1s
         curr_time = std::chrono::system_clock::now();
@@ -154,6 +152,7 @@ int main() {
         }
 
         glClear(GL_COLOR_BUFFER_BIT);
+
         // Drawing two trangles
         glUseProgram(shaderProgram);
         glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
@@ -170,7 +169,7 @@ int main() {
 
     // glfw: terminate, clearing all previously allocated GLFW resources.
     glfwTerminate();
-
     spdlog::info("Terminating program");
+
     return 0;
 }
