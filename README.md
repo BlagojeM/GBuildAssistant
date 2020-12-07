@@ -10,25 +10,32 @@ Game Engine
 
 ## Building
 
-If you are building package for first time it's recommended to do 
-things in cmd line rather than from IDE because sudo credentials 
+- If you are building package for first time it's recommended to run
+cmake in cmd line rather than from IDE because sudo credentials 
 should be acquired for some parts of build process.
+- **DO NOT!:** run `cmake` command with `sudo`, but should have sudo credentials.
+- Default build type is `Debug`, for `Release` run cmake with -DCMAKE\_BUILD\_TYPE=Release` flag.
 
-**DO NOT!** run `cmake` command with `sudo`, but should have sudo credentials.
+## Building on Linux
 
-**BUILD INSTRUCTIONS**
-
+- Assuming `gnu-make` is our native build system
 - Internet connection is required
 - Position yourself in root directory of project and run:
 
 ```bash
 mkdir build && cd build 
 sudo -v # Prompts to enter sudo password (acquire sudo credentials)
-cmake ..
+cmake .. -DCMAKE_BUILD_TYPE=Release # Change to 'Debug' for Debug version
 make
 ```
 
-**INFO**
+### Windows
+
+- On windows with **Visual Studio** project works out of box just open project folder
+- Project could also be used without Visual Studio but it is not tested
+- Also on Windows it is possible to use vscode with CMakeTools extension
+
+### INFO
 
 - Conan will try to automatically to install system dependencies.
 with default package manager for your system.
@@ -43,6 +50,7 @@ Project is **tested** and builds with:
 -  \[**x86\_64**\] Linux: Ubuntu, Arch, Debian with gcc/clang
 -  \[**arm64**\] Linux on Raspberry Pi 4: with gcc/clang
 
+It should work with some other platforms also (Apple, Android, iOS ...), but only these ones are tested.
 
 ## IDE Support
 

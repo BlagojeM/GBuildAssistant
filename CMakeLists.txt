@@ -4,7 +4,7 @@ project(GBuildAssistent)
 set(USER_SPECIFIED_BUILD_TYPE ${CMAKE_BUILD_TYPE})
 
 if (NOT USER_SPECIFIED_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE "Release")
+    set(CMAKE_BUILD_TYPE "Debug")
 endif()
 
 set(CMAKE_CXX_STANDARD 17)
@@ -46,7 +46,7 @@ target_link_libraries(GBuildAssistent ${CONAN_LIBS})
 
 if (NOT USER_SPECIFIED_BUILD_TYPE)
     message(WARNING 
-        "CMAKE_BUILD_TYPE defaulted to: Release. "
+        "CMAKE_BUILD_TYPE defaulted to: Debug. "
         "CMAKE_BUILD_TYPE possible options: Release|Debug|RelWithDebInfo|MinSizeRel. " 
         "If you want to chose CMAKE_BUILD_TYPE explicitly then run cmake with: -DCMAKE_BUILD_TYPE=DesiredBuildType "
     )
