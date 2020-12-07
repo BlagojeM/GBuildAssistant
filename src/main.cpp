@@ -1,4 +1,4 @@
-// Modified version of example: 
+// Modified version of example:
 // https://learnopengl.com/code_viewer_gh.php?code=src/1.getting_started/2.2.hello_triangle_indexed/hello_triangle_indexed.cpp
 
 #include <cstdlib>
@@ -23,9 +23,9 @@ int main() {
     // glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     // Hint to use GLES 3.0 instead of OpenGL
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3) ;
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0) ;
-    glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API) ;
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
 
 #ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
@@ -39,7 +39,7 @@ int main() {
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, [](GLFWwindow* win, int width, int height) {
         glViewport(0, 0, width, height);
-	});
+    });
 
     // glad: load all OpenGL function pointers
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -48,7 +48,7 @@ int main() {
     const GLubyte * version = glGetString(GL_VERSION);
     spdlog::warn("{}\n", version);
 
-    constexpr const char* vertexShaderSource = 
+    constexpr const char* vertexShaderSource =
         "#version 300 es\n"
         "layout (location = 0) in mediump vec3 aPos;\n"
         "void main()\n"
@@ -56,14 +56,14 @@ int main() {
         "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
         "}\0";
 
-    constexpr const char* fragmentShaderSource = 
+    constexpr const char* fragmentShaderSource =
         "#version 300 es\n"
         "out mediump vec4 FragColor;\n"
         "void main()\n"
         "{\n"
         "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
         "}\n\0";
-    
+
     // build and compile our shader program
     int vertexShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
@@ -72,7 +72,7 @@ int main() {
     int success;
     glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
     if (!success) {
-		char infoLog[512];
+        char infoLog[512];
         glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
         die(fmt::format("VERTEX SHADER COMPILATION FAILED\n{}\n", infoLog));
     }
@@ -83,7 +83,7 @@ int main() {
     // check for shader compile errors
     glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
     if (!success) {
-		char infoLog[512];
+        char infoLog[512];
         glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
         die(fmt::format("FRAGMENT SHADER COMPILATION FAILED\n{}\n", infoLog));
     }
@@ -95,7 +95,7 @@ int main() {
     // check for linking errors
     glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
     if (!success) {
-		char infoLog[512];
+        char infoLog[512];
         glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
         die(fmt::format("SHADER VERTEX COMPILATION FAILED\n{}\n", infoLog));
     }
@@ -107,7 +107,7 @@ int main() {
          0.5f,  0.5f, 0.0f,  // top right
          0.5f, -0.5f, 0.0f,  // bottom right
         -0.5f, -0.5f, 0.0f,  // bottom left
-        -0.5f,  0.5f, 0.0f   // top left 
+        -0.5f,  0.5f, 0.0f   // top left
     };
     unsigned int indices[] = {  // note that we start from 0!
         0, 1, 3,  // first Triangle
@@ -131,7 +131,7 @@ int main() {
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
-	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
     auto curr_time = std::chrono::system_clock::now(), prev_time = curr_time;
     int frame_count = 0;
@@ -152,7 +152,6 @@ int main() {
         }
 
         glClear(GL_COLOR_BUFFER_BIT);
-
         // Drawing two trangles
         glUseProgram(shaderProgram);
         glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
