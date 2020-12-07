@@ -29,7 +29,7 @@ cmake .. -DCMAKE_BUILD_TYPE=Release # Change to 'Debug' for Debug version
 make
 ```
 
-### Windows
+### Building on Windows
 
 - On windows with **Visual Studio** project works out of box just open project folder
 - Project could also be used without Visual Studio but it is not tested
