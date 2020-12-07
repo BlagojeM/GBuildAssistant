@@ -23,17 +23,17 @@ should be acquired for some parts of build process.
 
 ```bash
 mkdir build && cd build 
-# Update sudo credentials but DO NOT! run `cmake` command with `sudo`
-sudo -v # Prompts to enter sudo password
+sudo -v # Prompts to enter sudo password (acquire sudo credentials)
 cmake ..
 make
 ```
-Conan will try to automatically to install system dependencies
-with default package manager for your system
 
-Executable should be generated inside build/bin
+**INFO**
 
-After you've done building for first time, system dependencies should be installed
+- Conan will try to automatically to install system dependencies.
+with default package manager for your system.
+- Executable location: `build/bin/GBuildAssistant`
+- After you've done building for first time, system dependencies should be installed
 
 ## Platform Support
 
