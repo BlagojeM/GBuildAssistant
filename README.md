@@ -29,9 +29,9 @@ Executable should be generated inside build/bin
 
 Project is **tested** and builds with:
 
--  \[**x86\_64**\] Windows with MSVC compiler (visual studio)
--  \[**x86\_64**\] Linux (Ubuntu, Arch, Debian)
--  \[**arm64**\] Linux on Raspberry Pi 4
+-  \[**x86\_64**\] Windows: with MSVC compiler (visual studio)
+-  \[**x86\_64**\] Linux: Ubuntu, Arch, Debian with gcc/clang
+-  \[**arm64**\] Linux on Raspberry Pi 4: with gcc/clang
 
 
 ## IDE Support
