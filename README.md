@@ -17,7 +17,7 @@ should be acquired for some parts of build process
 - Default build type is `Debug`, for `Release` run cmake with `-DCMAKE_BUILD_TYPE=Release` flag
 - Internet connection is required on first build
 
-## Building on Linux
+### Building on Linux
 
 - Assuming `gnu-make` is our native build system
 - Position yourself in root directory of project and run:
