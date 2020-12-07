@@ -12,14 +12,14 @@ Game Engine
 
 - If you are building package for first time it's recommended to run
 cmake in cmd line rather than from IDE because sudo credentials 
-should be acquired for some parts of build process.
-- **DO NOT!:** run `cmake` command with `sudo`, but should have sudo credentials.
-- Default build type is `Debug`, for `Release` run cmake with -DCMAKE\_BUILD\_TYPE=Release` flag.
+should be acquired for some parts of build process
+- **DO NOT!:** run `cmake` command with `sudo`, but should have sudo credentials
+- Default build type is `Debug`, for `Release` run cmake with `-DCMAKE\_BUILD\_TYPE=Release` flag
+- Internet connection is required on first build
 
 ## Building on Linux
 
 - Assuming `gnu-make` is our native build system
-- Internet connection is required
 - Position yourself in root directory of project and run:
 
 ```bash
