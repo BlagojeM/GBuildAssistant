@@ -7,4 +7,4 @@ out
 compile_commands.json
 *build*
 CMakeLists.txt.user
-*.cmake
+cmake/conan.cmake
