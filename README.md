@@ -17,7 +17,7 @@ should be acquired for some parts of build process
 - Default build type is `Debug`, for `Release` run cmake with `-DCMAKE_BUILD_TYPE=Release` flag
 - Internet connection is required on first build
 
-## Building on Linux
+### Building on Linux
 
 - Assuming `gnu-make` is our native build system
 - Position yourself in root directory of project and run:
@@ -29,7 +29,7 @@ cmake .. -DCMAKE_BUILD_TYPE=Release # Change to 'Debug' for Debug version
 make
 ```
 
-### Windows
+### Building on Windows
 
 - On windows with **Visual Studio** project works out of box just open project folder
 - Project could also be used without Visual Studio but it is not tested
