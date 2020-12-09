@@ -1,4 +1,5 @@
 macro(run_conan)
+    set(CONAN_SYSTEM_INCLUDES "On") # use -isystem for conan includes instead of -I
     set(ENV{CONAN_SYSREQUIRES_MODE} "enabled")
     set(ENV{CONAN_SYSREQUIRES_SUDO} "1")
 
@@ -15,7 +16,7 @@ macro(run_conan)
             file(REMOVE "${CMAKE_CURRENT_LIST_DIR}/cmake/conan.cmake")
             message(FATAL_ERROR 
                 "Error downloading conan.cmake: ${ERROR_MESSAGE}, "  
-                "please check your Internet Connection!"
+                "Please check your Internet Connection!"
             )
         endif()
     endif()

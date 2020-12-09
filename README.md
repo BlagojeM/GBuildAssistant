@@ -6,7 +6,7 @@ Game Engine
 
 - Conan package manager:  [https://conan.io/](https://conan.io/)
 - CMake version 3.10+: [https://cmake.org/](https://cmake.org/)
-- Compiler with at least c++17 support (ex. gcc, msvc, clang, ...)
+- Compiler with at least c++20 support (ex. gcc, msvc, clang, ...)
 
 ## Building
 
@@ -38,9 +38,11 @@ make
 ### INFO
 
 - Conan will try to automatically to install system dependencies.
-with default package manager for your system.
+with default package manager for your system
 - Executable location: `build/bin/GBuildAssistant`
 - After you've done building for first time, system dependencies should be installed
+- It is very desirable to have clang-tidy and cpp-check installed on system, it will
+automatically be integrated with the project
 
 ## Platform Support
 

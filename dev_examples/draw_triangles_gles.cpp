@@ -5,10 +5,13 @@
 #include <string_view>
 #include <chrono>
 
-#include "fmt/format.h"
-#include "spdlog/spdlog.h"
-#include "glad/glad.h"
-#include "GLFW/glfw3.h"
+#include <fmt/format.h>
+#include <spdlog/spdlog.h>
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
+constexpr unsigned msg_len = 512;
+constexpr unsigned screen_width = 800, screen_height=600;
 
 void die(std::string_view msg) {
     spdlog::error(msg);
@@ -25,7 +28,7 @@ int main() {
 #ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
-    GLFWwindow* window = glfwCreateWindow(800, 600, "Triangles", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(screen_width, screen_height, "Triangles", nullptr, nullptr);
     if (window == nullptr) {
         glfwTerminate();
         die("Failed to create GLFW window");
@@ -64,12 +67,12 @@ int main() {
     glShaderSource(vertex_shader, 1, &vertex_shader_source, nullptr);
     glCompileShader(vertex_shader);
     // check for shader compile errors
-    int success;
+    int success{0};
     glGetShaderiv(vertex_shader, GL_COMPILE_STATUS, &success);
     if (!success) {
-        char infoLog[512];
-        glGetShaderInfoLog(vertex_shader, 512, nullptr, infoLog);
-        die(fmt::format("VERTEX SHADER COMPILATION FAILED\n{}\n", infoLog));
+        std::array<char, msg_len> infoLog{};
+        glGetShaderInfoLog(vertex_shader, msg_len, nullptr, infoLog.data());
+        die(fmt::format("VERTEX SHADER COMPILATION FAILED\n{}\n", infoLog.data()));
     }
     // fragment shader
     GLuint fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
@@ -78,9 +81,9 @@ int main() {
     // check for shader compile errors
     glGetShaderiv(fragment_shader, GL_COMPILE_STATUS, &success);
     if (!success) {
-        char infoLog[512];
-        glGetShaderInfoLog(fragment_shader, 512, nullptr, infoLog);
-        die(fmt::format("FRAGMENT SHADER COMPILATION FAILED\n{}\n", infoLog));
+        std::array<char, msg_len> infoLog{};
+        glGetShaderInfoLog(fragment_shader, msg_len, nullptr, infoLog.data());
+        die(fmt::format("FRAGMENT SHADER COMPILATION FAILED\n{}\n", infoLog.data()));
     }
     // link shaders
     GLuint shader_program = glCreateProgram();
@@ -90,36 +93,37 @@ int main() {
     // check for linking errors
     glGetProgramiv(shader_program, GL_LINK_STATUS, &success);
     if (!success) {
-        char infoLog[512];
-        glGetProgramInfoLog(shader_program, 512, nullptr, infoLog);
-        die(fmt::format("SHADER VERTEX COMPILATION FAILED\n{}\n", infoLog));
+        std::array<char, msg_len> infoLog{};
+        glGetProgramInfoLog(shader_program, msg_len, nullptr, infoLog.data());
+        die(fmt::format("SHADER VERTEX COMPILATION FAILED\n{}\n", infoLog.data()));
     }
     glDeleteShader(vertex_shader);
     glDeleteShader(fragment_shader);
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
-    float vertices[] = {
+    constexpr std::array vertices {
         -0.75f, -0.75f, 0.0f, // bottom-left
         -0.75f, 0.75f, 0.0f,  // top-left
          0.0f, 0.0f, 0.0f,    // middle
          0.75f, -0.75f, 0.0f, // bottom-right
          0.75f, 0.75f, 0.0f,  // top-right
     };
-    unsigned int indices[] = {
+    constexpr std::array indices {
         0, 1, 2,  // triangle1
         2, 3, 4,  // triangle2
     };
-    unsigned int VBO, VAO, EBO;
+
+    unsigned VBO{0}, VAO{0}, EBO{0};
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
     glBindVertexArray(VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices.data(), GL_STATIC_DRAW);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices.data(), GL_STATIC_DRAW);
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
     glEnableVertexAttribArray(0);
@@ -150,7 +154,7 @@ int main() {
         // Drawing two trangles
         glUseProgram(shader_program);
         glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
