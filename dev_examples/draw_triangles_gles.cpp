@@ -2,8 +2,11 @@
 // https://learnopengl.com/code_viewer_gh.php?code=src/1.getting_started/2.2.hello_triangle_indexed/hello_triangle_indexed.cpp
 
 #include <cstdlib>
+#include <string>
 #include <string_view>
 #include <chrono>
+#include <array>
+#include <compare>
 
 #include <fmt/format.h>
 #include <spdlog/spdlog.h>
@@ -144,7 +147,7 @@ int main() {
        // Calculate FPS to display every 1s
         curr_time = std::chrono::system_clock::now();
         frame_count++;
-        if (curr_time - prev_time >= std::chrono::seconds(1)) {
+        if ((curr_time - prev_time) >= std::chrono::seconds(1)) {
             spdlog::info("Frames per second: {}", frame_count);
             frame_count = 0;
             prev_time = curr_time;

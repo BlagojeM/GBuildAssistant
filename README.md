@@ -41,7 +41,7 @@ make
 with default package manager for your system
 - Executable location: `build/bin/GBuildAssistant`
 - After you've done building for first time, system dependencies should be installed
-- It is very desirable to have clang-tidy and cpp-check installed on system, it will
+- It is very desirable to have **clang-tidy** and **cpp-check** and **include-what-you-use** installed on system, it will
 automatically be integrated with the project
 
 ## Platform Support
