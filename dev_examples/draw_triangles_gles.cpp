@@ -21,6 +21,11 @@ void die(std::string_view msg) {
     exit(EXIT_FAILURE);
 }
 
+template <typename T, std::size_t N> 
+std::size_t sizeof_array_data(const std::array<T,N> &arr) {
+    return arr.size() * sizeof(T);
+}
+
 int main() {
     glfwInit();
     // Hint to use GLES 3.0 instead of OpenGL
@@ -123,10 +128,12 @@ int main() {
     glBindVertexArray(VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, 
+            static_cast<GLsizei>(sizeof_array_data(vertices)), vertices.data(), GL_STATIC_DRAW);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 
+            static_cast<GLsizei>(sizeof_array_data(indices)), indices.data(), GL_STATIC_DRAW);
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
     glEnableVertexAttribArray(0);
