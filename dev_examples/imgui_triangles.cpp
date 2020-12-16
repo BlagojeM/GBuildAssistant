@@ -25,7 +25,7 @@ void die(std::string_view msg) {
 }
 
 template <typename T, std::size_t N> 
-consteval std::size_t sizeof_array_data(const std::array<T,N> &arr) {
+std::size_t sizeof_array_data(const std::array<T,N> &arr) {
     return arr.size() * sizeof(T);
 }
 
@@ -183,9 +183,9 @@ int main() {
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
+        ImGui::SetNextWindowPos({ 0, 0 }, ImGuiCond_Once);
+        ImGui::SetNextWindowSize({ 400, 100 }, ImGuiCond_Once);
         ImGui::Begin("Frames per second");
-        ImGui::SetWindowSize({400, 100});
-        ImGui::SetWindowPos({0,0});
         ImGui::Text("Rendered %d frames per second", fps);
         ImGui::ColorEdit3("Background color", bg_color.data());
         ImGui::ColorEdit3("Triangles color", triangles_color.data());

@@ -22,7 +22,7 @@ void die(std::string_view msg) {
 }
 
 template <typename T, std::size_t N> 
-consteval std::size_t sizeof_array_data(const std::array<T,N> &arr) {
+std::size_t sizeof_array_data(const std::array<T,N> &arr) {
     return arr.size() * sizeof(T);
 }
 
