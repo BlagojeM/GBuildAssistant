@@ -24,7 +24,7 @@ void die(std::string_view msg) {
     exit(EXIT_FAILURE);
 }
 
-template <typename T, std::size_t N> 
+template <typename T, std::size_t N>
 std::size_t sizeof_array_data(const std::array<T,N> &arr) {
     return arr.size() * sizeof(T);
 }
@@ -35,7 +35,7 @@ int main() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	const char * glsl_version = "#version 330 core";
+    const char * glsl_version = "#version 330 core";
 
 #ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
@@ -134,11 +134,11 @@ int main() {
     glBindVertexArray(VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, 
+    glBufferData(GL_ARRAY_BUFFER,
             static_cast<GLsizei>(sizeof_array_data(vertices)), vertices.data(), GL_STATIC_DRAW);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER,
             static_cast<GLsizei>(sizeof_array_data(indices)), indices.data(), GL_STATIC_DRAW);
 
     glVertexAttribPointer(0u, 3, GL_FLOAT, GL_FALSE, 3u * sizeof(float), nullptr);
@@ -180,9 +180,9 @@ int main() {
         }
 
         // feed inputs to dear imgui, start new frame
-		ImGui_ImplOpenGL3_NewFrame();
-		ImGui_ImplGlfw_NewFrame();
-		ImGui::NewFrame();
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
         ImGui::SetNextWindowPos({ 0, 0 }, ImGuiCond_Once);
         ImGui::SetNextWindowSize({ 400, 100 }, ImGuiCond_Once);
         ImGui::Begin("Controls");
@@ -216,8 +216,8 @@ int main() {
     spdlog::info("Terminating program");
 
     ImGui_ImplOpenGL3_Shutdown();
-	ImGui_ImplGlfw_Shutdown();
-	ImGui::DestroyContext();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
     glfwDestroyWindow(window);
     glfwTerminate();
 

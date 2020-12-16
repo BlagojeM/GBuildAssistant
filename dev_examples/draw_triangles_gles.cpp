@@ -21,7 +21,7 @@ void die(std::string_view msg) {
     exit(EXIT_FAILURE);
 }
 
-template <typename T, std::size_t N> 
+template <typename T, std::size_t N>
 std::size_t sizeof_array_data(const std::array<T,N> &arr) {
     return arr.size() * sizeof(T);
 }
@@ -128,11 +128,11 @@ int main() {
     glBindVertexArray(VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, 
+    glBufferData(GL_ARRAY_BUFFER,
             static_cast<GLsizei>(sizeof_array_data(vertices)), vertices.data(), GL_STATIC_DRAW);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER,
             static_cast<GLsizei>(sizeof_array_data(indices)), indices.data(), GL_STATIC_DRAW);
 
     glVertexAttribPointer(0u, 3, GL_FLOAT, GL_FALSE, 3u * sizeof(float), nullptr);
