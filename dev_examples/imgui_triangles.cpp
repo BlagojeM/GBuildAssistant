@@ -185,7 +185,7 @@ int main() {
 		ImGui::NewFrame();
         ImGui::SetNextWindowPos({ 0, 0 }, ImGuiCond_Once);
         ImGui::SetNextWindowSize({ 400, 100 }, ImGuiCond_Once);
-        ImGui::Begin("Frames per second");
+        ImGui::Begin("Controls");
         ImGui::Text("Rendered %d frames per second", fps);
         ImGui::ColorEdit3("Background color", bg_color.data());
         ImGui::ColorEdit3("Triangles color", triangles_color.data());
