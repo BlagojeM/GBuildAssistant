@@ -37,6 +37,7 @@ imgui_backends()
 
 add_library(imgui_glfw_opengl INTERFACE)
 target_include_directories(imgui_glfw_opengl INTERFACE ${CMAKE_CURRENT_LIST_DIR}/imgui_backends/include)
+target_compile_definitions(imgui_glfw_opengl INTERFACE IMGUI_IMPL_OPENGL_LOADER_GLAD=1)
 target_sources(imgui_glfw_opengl INTERFACE 
      ${CMAKE_CURRENT_LIST_DIR}/imgui_backends/imgui_impl_glfw.cpp 
      ${CMAKE_CURRENT_LIST_DIR}/imgui_backends/imgui_impl_opengl3.cpp)

@@ -1,5 +1,3 @@
-// Modified version of example:
-// https://learnopengl.com/code_viewer_gh.php?code=src/1.getting_started/2.2.hello_triangle_indexed/hello_triangle_indexed.cpp
 #include <cstdlib>
 #include <string>
 #include <string_view>
