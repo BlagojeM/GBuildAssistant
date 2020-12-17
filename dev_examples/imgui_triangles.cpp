@@ -5,7 +5,6 @@
 #include <string_view>
 #include <chrono>
 #include <array>
-#include <compare>
 
 #include <fmt/format.h>
 #include <spdlog/spdlog.h>
