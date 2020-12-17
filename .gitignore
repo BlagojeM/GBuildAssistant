@@ -6,5 +6,7 @@ out
 .vs
 compile_commands.json
 *build*
+*debug*
+*imgui_backends*
 CMakeLists.txt.user
 cmake/conan.cmake

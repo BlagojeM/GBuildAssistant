@@ -6,7 +6,7 @@ include(cmake/PreventInSourceBuilds.cmake)
 
 add_library(project_options INTERFACE)
 target_compile_features(project_options INTERFACE cxx_std_20)
-target_include_directories(project_options INTERFACE include)
+target_include_directories(project_options INTERFACE include imgui_backends/include)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
   option(ENABLE_BUILD_WITH_TIME_TRACE "Enable -ftime-trace to generate time tracing .json files on clang" OFF)
@@ -31,6 +31,15 @@ run_conan()
 
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)  # Includes the contents of the conanbuildinfo.cmake file.
 conan_basic_setup()  # Prepares the CMakeList.txt for Conan.
+
+include(cmake/ImGuiBackends.cmake)
+imgui_backends()
+
+add_library(imgui_glfw_opengl INTERFACE)
+target_include_directories(imgui_glfw_opengl INTERFACE ${CMAKE_CURRENT_LIST_DIR}/imgui_backends/include)
+target_sources(imgui_glfw_opengl INTERFACE 
+     ${CMAKE_CURRENT_LIST_DIR}/imgui_backends/imgui_impl_glfw.cpp 
+     ${CMAKE_CURRENT_LIST_DIR}/imgui_backends/imgui_impl_opengl3.cpp)
 
 option(BUILD_SRC "Enable Building of 'src'" ON)
 if(BUILD_SRC)

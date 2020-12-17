@@ -3,24 +3,8 @@ macro(run_conan)
     set(ENV{CONAN_SYSREQUIRES_MODE} "enabled")
     set(ENV{CONAN_SYSREQUIRES_SUDO} "1")
 
-    if(NOT EXISTS "${CMAKE_CURRENT_LIST_DIR}/cmake/conan.cmake")
-       message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
-       file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/master/conan.cmake"
-           "${CMAKE_CURRENT_LIST_DIR}/cmake/conan.cmake" STATUS DOWNLOAD_STATUS)
-
-        list(GET DOWNLOAD_STATUS 0 STATUS_CODE)
-        list(GET DOWNLOAD_STATUS 1 ERROR_MESSAGE)
-        if(${STATUS_CODE} EQUAL 0)
-            message(STATUS "conan.cmake downloaded successfully!")
-        else()
-            file(REMOVE "${CMAKE_CURRENT_LIST_DIR}/cmake/conan.cmake")
-            message(FATAL_ERROR 
-                "Error downloading conan.cmake: ${ERROR_MESSAGE}, "  
-                "Please check your Internet Connection!"
-            )
-        endif()
-    endif()
-
+    include(cmake/DownloadIfNotExists.cmake)
+    download_if_not_exists("${CMAKE_CURRENT_LIST_DIR}/cmake/conan.cmake" "https://raw.githubusercontent.com/conan-io/cmake-conan/master/conan.cmake")
     include(${CMAKE_CURRENT_LIST_DIR}/cmake/conan.cmake)
 
     conan_add_remote(

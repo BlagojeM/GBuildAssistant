@@ -1,0 +1,8 @@
+macro(imgui_backends)
+    include(cmake/DownloadIfNotExists.cmake)
+    file(MAKE_DIRECTORY "imgui_backends")
+    download_if_not_exists("${CMAKE_CURRENT_LIST_DIR}/imgui_backends/include/imgui_impl_glfw.h" "https://raw.githubusercontent.com/ocornut/imgui/master/backends/imgui_impl_glfw.h")
+    download_if_not_exists("${CMAKE_CURRENT_LIST_DIR}/imgui_backends/imgui_impl_glfw.cpp" "https://raw.githubusercontent.com/ocornut/imgui/master/backends/imgui_impl_glfw.cpp")
+    download_if_not_exists("${CMAKE_CURRENT_LIST_DIR}/imgui_backends/include/imgui_impl_opengl3.h" "https://raw.githubusercontent.com/ocornut/imgui/master/backends/imgui_impl_opengl3.h")
+    download_if_not_exists("${CMAKE_CURRENT_LIST_DIR}/imgui_backends/imgui_impl_opengl3.cpp" "https://raw.githubusercontent.com/ocornut/imgui/master/backends/imgui_impl_opengl3.cpp")
+endmacro()
