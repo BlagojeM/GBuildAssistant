@@ -27,11 +27,9 @@ std::size_t sizeof_array_data(const std::array<T,N> &arr) {
 
 int main() {
     glfwInit();
-    // Hint to use GLES 3.0 instead of OpenGL
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
-    glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
-
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 #ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
@@ -54,7 +52,7 @@ int main() {
     spdlog::warn("{}\n", version);
 
     constexpr const char* vertex_shader_source =
-        "#version 300 es\n"
+        "#version 330 core\n"
         "layout (location = 0) in mediump vec3 aPos;\n"
         "void main()\n"
         "{\n"
@@ -62,7 +60,7 @@ int main() {
         "}\0";
 
     constexpr const char* fragment_shader_source =
-        "#version 300 es\n"
+        "#version 330 core\n"
         "out mediump vec4 FragColor;\n"
         "void main()\n"
         "{\n"
