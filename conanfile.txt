@@ -7,7 +7,7 @@ imgui/1.79
 
 imgui-glfw/github-latest-0.5.1@kotur/stable
 imgui-glad-opengl3/github-latest-0.5.1@kotur/stable
-imgui-glad-gles3/github-latest-0.5.1@kotur/stable
+imgui-glad-gles3/github-latest-0.5.2@kotur/stable
 
 [options]
 
