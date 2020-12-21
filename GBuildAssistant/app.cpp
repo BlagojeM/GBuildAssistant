@@ -1,6 +1,8 @@
 #include "gba/app.hpp"
 #include "gba/debug.hpp"
 
+#include <array>
+
 #include <fmt/format.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
