@@ -1,5 +1,5 @@
-#include "app.hpp"
-#include "debug.hpp"
+#include "gba/app.hpp"
+#include "gba/debug.hpp"
 
 #include <fmt/format.h>
 #include <glad/glad.h>

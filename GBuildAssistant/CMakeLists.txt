@@ -1,6 +1,6 @@
 set(GBA_HEADERS
-    include/app.hpp 
-    include/debug.hpp
+    include/gba/app.hpp 
+    include/gba/debug.hpp
 )
 
 set(GBA_SOURCES

@@ -1,4 +1,4 @@
-#include "app.hpp"
+#include "gba/app.hpp"
 
 int main() {
 
