@@ -159,24 +159,13 @@ int main() {
     ImGui_ImplOpenGL3_Init(glsl_version);
 
     auto curr_time = std::chrono::system_clock::now(), prev_time = curr_time;
-    unsigned frame_count = 0u;
+    long int fps = 0;
     glfwSwapInterval(0); // assert swap interval is not binded to 60 fps
     spdlog::info("Entering render LOOP");
-    unsigned fps = 0;
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
         if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
             glfwSetWindowShouldClose(window, true);
-
-               // Calculate FPS to display every 1s
-        curr_time = std::chrono::system_clock::now();
-        frame_count++;
-        if ((curr_time - prev_time) >= std::chrono::seconds(1)) {
-            spdlog::info("Frames per second: {}", frame_count);
-            fps = frame_count;
-            frame_count = 0u;
-            prev_time = curr_time;
-        }
 
         // feed inputs to dear imgui, start new frame
         ImGui_ImplOpenGL3_NewFrame();
@@ -185,7 +174,7 @@ int main() {
         ImGui::SetNextWindowPos({ 0, 0 }, ImGuiCond_Once);
         ImGui::SetNextWindowSize({ 400, 100 }, ImGuiCond_Once);
         ImGui::Begin("Controls");
-        ImGui::Text("Rendered %d frames per second", fps);
+        ImGui::Text("Rendering at %ld frames per second", fps);
         ImGui::ColorEdit3("Background color", bg_color.data());
         ImGui::ColorEdit3("Triangles color", triangles_color.data());
         ImGui::End();
@@ -203,6 +192,10 @@ int main() {
         glDrawElements(GL_TRIANGLES, 6u, GL_UNSIGNED_INT, nullptr);
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         glfwSwapBuffers(window);
+
+        curr_time = std::chrono::system_clock::now();
+        fps = std::chrono::seconds(1)/(curr_time - prev_time);
+        prev_time = curr_time;
     }
 
     // optional: de-allocate all resources once they've outlived their purpose:
