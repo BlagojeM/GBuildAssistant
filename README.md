@@ -5,7 +5,7 @@ Game Engine
 ## Requirements
 
 - Conan package manager:  [https://conan.io/](https://conan.io/)
-- CMake version 3.10+: [https://cmake.org/](https://cmake.org/)
+- CMake version 3.15+: [https://cmake.org/](https://cmake.org/)
 - Compiler with at least c++20 support (ex. gcc, msvc, clang, ...)
 
 ## Building
@@ -50,9 +50,7 @@ Project is **tested** and builds with:
 
 -  \[**x86\_64**\] Windows: with MSVC compiler (visual studio)
 -  \[**x86\_64**\] Linux: Ubuntu, Arch, Debian with gcc/clang
--  \[**arm64**\] Linux on Raspberry Pi 4: with gcc/clang
-
-It should work with some other platforms also (Apple, Android, iOS ...), but only these ones are tested.
+-  \[**x86\_64**\] Mac OS: Mac OS Catalina + homebrew package manager
 
 ## IDE Support
 
