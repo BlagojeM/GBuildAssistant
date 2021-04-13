@@ -1,5 +1,5 @@
 ---
-Checks: 'clang-diagnostic-*,clang-analyzer-*,-*,bugprone*,modernize*,performance*,-modernize-pass-by-value,-modernize-use-auto,-modernize-use-using,cppcoreguidelines-*,-modernize-use-trailing-return-type'
+Checks: 'clang-diagnostic-*,clang-analyzer-*,-*,bugprone*,modernize*,performance*,-modernize-pass-by-value,-modernize-use-auto,-modernize-use-using,cppcoreguidelines-*,-modernize-use-trailing-return-type, -modernize-use-nullptr'
 WarningsAsErrors: ''
 HeaderFilterRegex: ''
 FormatStyle:     none
