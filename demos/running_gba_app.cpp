@@ -1,13 +1,11 @@
 #include "gba/app.hpp"
 
-int main() {
+int main()
+{
 
-    gba::App app({
-        .window_width = 1024,
-        .window_height = 768
-    });
+  gba::App app({ .window_width = 1024, .window_height = 768 });
 
-    app.run();
+  app.run();
 
-    return 0;
+  return 0;
 }

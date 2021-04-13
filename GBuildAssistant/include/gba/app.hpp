@@ -4,19 +4,21 @@
 
 namespace gba {
 
-struct AppParams {
-    std::string_view window_name = "GBuildAssistant App";
-    int window_width = 800;
-    int window_height = 600;
+struct AppParams
+{
+  std::string_view window_name = "GBuildAssistant App";
+  int window_width             = 800;
+  int window_height            = 600;
 };
 
-class App {
+class App
+{
 public:
-    App(AppParams params);
-    void run();
-    ~App();
+  App(AppParams params);
+  void run();
+  ~App();
 };
 
-} // ns gba
+} // namespace gba
 
 #endif
