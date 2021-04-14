@@ -4,7 +4,7 @@
 namespace gba {
 void die(std::string_view msg)
 {
-  spdlog::error(msg);
-  exit(EXIT_FAILURE);
+    spdlog::error(msg);
+    exit(EXIT_FAILURE);
 }
 } // namespace gba
