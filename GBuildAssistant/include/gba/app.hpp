@@ -15,7 +15,7 @@ class App
 {
 public:
   App(AppParams params);
-  void run();
+  static void run();
   ~App();
 };
 

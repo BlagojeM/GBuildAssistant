@@ -21,13 +21,13 @@ template<typename T, std::size_t N> std::size_t sizeof_array_data(const std::arr
 
 static GLFWwindow *window    = nullptr;
 static GLuint shader_program = 0;
-static unsigned VBO{ 0u }, VAO{ 0u }, EBO{ 0u };
+static unsigned vbo{ 0U }, vao{ 0U }, ebo{ 0U };
 static const char *glsl_version = "#version 330 core";
 
 namespace gba {
 App::App(AppParams params)
 {
-  constexpr unsigned msg_len = 512u;
+  constexpr unsigned msg_len = 512U;
   glfwInit();
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -46,7 +46,9 @@ App::App(AppParams params)
     window, [](GLFWwindow * /*win*/, int width, int height) { glViewport(0, 0, width, height); });
 
   // glad: load all OpenGL function pointers
-  if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress))) gba::die("Failed to initialize GLAD");
+  if (!static_cast<bool>(gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress)))) { 
+      gba::die("Failed to initialize GLAD");
+  }
 
   const GLubyte *version = glGetString(GL_VERSION);
   gba::warn("{}\n", version);
@@ -75,10 +77,10 @@ App::App(AppParams params)
   // check for shader compile errors
   int success{ 0 };
   glGetShaderiv(vertex_shader, GL_COMPILE_STATUS, &success);
-  if (!success) {
-    std::array<char, msg_len> infoLog{};
-    glGetShaderInfoLog(vertex_shader, msg_len, nullptr, infoLog.data());
-    gba::die(fmt::format("VERTEX SHADER COMPILATION FAILED\n{}\n", infoLog.data()));
+  if (!static_cast<bool>(success)) {
+    std::array<char, msg_len> info_log{};
+    glGetShaderInfoLog(vertex_shader, msg_len, nullptr, info_log.data());
+    gba::die(fmt::format("VERTEX SHADER COMPILATION FAILED\n{}\n", info_log.data()));
   }
   // fragment shader
   GLuint fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
@@ -86,10 +88,10 @@ App::App(AppParams params)
   glCompileShader(fragment_shader);
   // check for shader compile errors
   glGetShaderiv(fragment_shader, GL_COMPILE_STATUS, &success);
-  if (!success) {
-    std::array<char, msg_len> infoLog{};
-    glGetShaderInfoLog(fragment_shader, msg_len, nullptr, infoLog.data());
-    gba::die(fmt::format("FRAGMENT SHADER COMPILATION FAILED\n{}\n", infoLog.data()));
+  if (!static_cast<bool>(success)) {
+    std::array<char, msg_len> info_log{};
+    glGetShaderInfoLog(fragment_shader, msg_len, nullptr, info_log.data());
+    gba::die(fmt::format("FRAGMENT SHADER COMPILATION FAILED\n{}\n", info_log.data()));
   }
   // link shaders
   shader_program = glCreateProgram();
@@ -98,65 +100,65 @@ App::App(AppParams params)
   glLinkProgram(shader_program);
   // check for linking errors
   glGetProgramiv(shader_program, GL_LINK_STATUS, &success);
-  if (!success) {
-    std::array<char, msg_len> infoLog{};
-    glGetProgramInfoLog(shader_program, msg_len, nullptr, infoLog.data());
-    gba::die(fmt::format("SHADER VERTEX COMPILATION FAILED\n{}\n", infoLog.data()));
+  if (!static_cast<bool>(success)) {
+    std::array<char, msg_len> info_log{};
+    glGetProgramInfoLog(shader_program, msg_len, nullptr, info_log.data());
+    gba::die(fmt::format("SHADER VERTEX COMPILATION FAILED\n{}\n", info_log.data()));
   }
   glDeleteShader(vertex_shader);
   glDeleteShader(fragment_shader);
 
   // set up vertex data (and buffer(s)) and configure vertex attributes
   constexpr std::array vertices{
-    -0.75f,
-    -0.75f,
-    0.0f, // bottom-left
-    -0.75f,
-    0.75f,
-    0.0f, // top-left
-    0.0f,
-    0.0f,
-    0.0f, // middle
-    0.75f,
-    -0.75f,
-    0.0f, // bottom-right
-    0.75f,
-    0.75f,
-    0.0f, // top-right
+    -0.75F,
+    -0.75F,
+    0.0F, // bottom-left
+    -0.75F,
+    0.75F,
+    0.0F, // top-left
+    0.0F,
+    0.0F,
+    0.0F, // middle
+    0.75F,
+    -0.75F,
+    0.0F, // bottom-right
+    0.75F,
+    0.75F,
+    0.0F, // top-right
   };
   constexpr std::array indices{
-    0u,
-    1u,
-    2u, // triangle1
-    2u,
-    3u,
-    4u, // triangle2
+    0U,
+    1U,
+    2U, // triangle1
+    2U,
+    3U,
+    4U, // triangle2
   };
 
-  glGenVertexArrays(1u, &VAO);
-  glGenBuffers(1u, &VBO);
-  glGenBuffers(1u, &EBO);
-  glBindVertexArray(VAO);
+  glGenVertexArrays(1U, &vao);
+  glGenBuffers(1U, &vbo);
+  glGenBuffers(1U, &ebo);
+  glBindVertexArray(vao);
 
-  glBindBuffer(GL_ARRAY_BUFFER, VBO);
+  glBindBuffer(GL_ARRAY_BUFFER, vbo);
   glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizei>(sizeof_array_data(vertices)), vertices.data(), GL_STATIC_DRAW);
 
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
   glBufferData(
     GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizei>(sizeof_array_data(indices)), indices.data(), GL_STATIC_DRAW);
 
-  glVertexAttribPointer(0u, 3, GL_FLOAT, GL_FALSE, 3u * sizeof(float), nullptr);
-  glEnableVertexAttribArray(0u);
+  glVertexAttribPointer(0U, 3, GL_FLOAT, GL_FALSE, 3U * sizeof(float), nullptr);
+  glEnableVertexAttribArray(0U);
 
-  glBindBuffer(GL_ARRAY_BUFFER, 0u);
-  glBindVertexArray(0u);
+  glBindBuffer(GL_ARRAY_BUFFER, 0U);
+  glBindVertexArray(0U);
 }
 
 void App::run()
 {
-  std::array triangles_color{ 1.0f, 0.5f, 0.2f };
-  std::array bg_color{ 0.2f, 0.3f, 0.3f };
-  glClearColor(bg_color[0], bg_color[1], bg_color[2], 1.0f);
+  std::array triangles_color{ 1.0F, 0.5F, 0.2F };
+  std::array bg_color{ 0.2F, 0.3F, 0.3F };
+  glClearColor(bg_color[0], bg_color[1], bg_color[2], 1.0F);
 
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
@@ -167,13 +169,16 @@ void App::run()
   ImGui_ImplOpenGL3_Init(glsl_version);
 
 
-  auto curr_time = std::chrono::system_clock::now(), prev_time = curr_time;
+  auto curr_time = std::chrono::system_clock::now();
+  auto prev_time = curr_time;
   long int fps = 0;
   glfwSwapInterval(0); // assert swap interval is not binded to 60 fps
   info("Entering render LOOP");
-  while (!glfwWindowShouldClose(window)) {
+  while (!static_cast<bool>(glfwWindowShouldClose(window))) {
     glfwPollEvents();
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) glfwSetWindowShouldClose(window, true);
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) { 
+        glfwSetWindowShouldClose(window, 1);
+    }
 
     // feed inputs to dear imgui, start new frame
     ImGui_ImplOpenGL3_NewFrame();
@@ -189,15 +194,15 @@ void App::run()
     ImGui::Render();
 
     // Drawing two trangles
-    glClearColor(bg_color[0], bg_color[1], bg_color[2], 1.0f);
+    glClearColor(bg_color[0], bg_color[1], bg_color[2], 1.0F);
     glClear(GL_COLOR_BUFFER_BIT);
     glUseProgram(shader_program);
 
     int triangles_color_loc = glGetUniformLocation(shader_program, "triangles_color");
     glUniform3f(triangles_color_loc, triangles_color[0], triangles_color[1], triangles_color[2]);
 
-    glBindVertexArray(VAO);
-    glDrawElements(GL_TRIANGLES, 6u, GL_UNSIGNED_INT, nullptr);
+    glBindVertexArray(vao);
+    glDrawElements(GL_TRIANGLES, 6U, GL_UNSIGNED_INT, nullptr);
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
     glfwSwapBuffers(window);
 
@@ -207,9 +212,9 @@ void App::run()
   }
 
   // optional: de-allocate all resources once they've outlived their purpose:
-  glDeleteVertexArrays(1u, &VAO);
-  glDeleteBuffers(1u, &VBO);
-  glDeleteBuffers(1u, &EBO);
+  glDeleteVertexArrays(1U, &vao);
+  glDeleteBuffers(1U, &vbo);
+  glDeleteBuffers(1U, &ebo);
   glDeleteProgram(shader_program);
 }
 
