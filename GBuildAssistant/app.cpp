@@ -1,3 +1,6 @@
+/* Enable including glfw/glad headers in any order */
+#define GLFW_INCLUDE_NONE 
+
 #include "gba/app.hpp"
 #include "gba/debug.hpp"
 

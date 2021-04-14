@@ -1,5 +1,11 @@
 ---
-Checks: 'clang-diagnostic-*,clang-analyzer-*,-*,bugprone*,modernize*,performance*,-modernize-pass-by-value,-modernize-use-auto,-modernize-use-using,cppcoreguidelines-*,-modernize-use-trailing-return-type, -modernize-use-nullptr'
+Checks: 'clang-diagnostic-*, clang-analyzer-*, modernize-*, performance-*, cppcoreguidelines-*, bugprone-*, llvm-*, -modernize-use-trailing-return-type, -modernize-use-nullptr'
+CheckOptions:
+    - {key: readability-identifier-naming.ClassCase,           value: CamelCase }
+    - {key: readability-identifier-naming.VariableCase,        value: lower_case }
+    - {key: readability-identifier-naming.FunctionCase,        value: lower_case }
+    - {key: readability-identifier-naming.ParameterCase,       value: lower_case }
+    - {key: readability-identifier-naming.MemberPrefix,        value: m_ }
 WarningsAsErrors: ''
 HeaderFilterRegex: ''
 FormatStyle:     none
