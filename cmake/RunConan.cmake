@@ -9,18 +9,10 @@ macro(run_conan)
 
     conan_add_remote(
         NAME
-        bincrafters
+        kotur
         URL
-        https://api.bintray.com/conan/bincrafters/public-conan
+        https://conan.kotur.me/artifactory/api/conan/public-conan
     )
-
-    # bintray is now for paid users only
-    #conan_add_remote(
-        #NAME
-        #kotur
-        #URL
-        #https://api.bintray.com/conan/kotur/public-conan
-    #)
 
     conan_cmake_run (
         CONANFILE conanfile.txt
