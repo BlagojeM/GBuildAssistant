@@ -11,7 +11,7 @@ macro(run_conan)
         NAME
         kotur
         URL
-        https://aft.kotur.me/artifactory/api/conan/public-conan
+        https://atf.kotur.me/artifactory/api/conan/public-conan
     )
 
     conan_cmake_run (
