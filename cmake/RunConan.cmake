@@ -4,7 +4,7 @@ macro(run_conan)
     set(ENV{CONAN_SYSREQUIRES_SUDO} "1")
 
     include(cmake/DownloadIfNotExists.cmake)
-    download_if_not_exists("${CMAKE_CURRENT_LIST_DIR}/cmake/conan.cmake" "https://raw.githubusercontent.com/conan-io/cmake-conan/master/conan.cmake")
+    download_if_not_exists("${CMAKE_CURRENT_LIST_DIR}/cmake/conan.cmake" "https://raw.githubusercontent.com/conan-io/cmake-conan/develop/conan.cmake")
     include(${CMAKE_CURRENT_LIST_DIR}/cmake/conan.cmake)
 
     conan_add_remote(
